@@ -1,8 +1,10 @@
-package com.np.fitnessapp;
+package com.np.fitnessapp.activity.user;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.np.fitnessapp.R;
 
 public class UserCreateActivity extends AppCompatActivity {
 

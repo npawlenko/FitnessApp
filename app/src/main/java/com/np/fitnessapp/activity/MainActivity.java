@@ -1,4 +1,4 @@
-package com.np.fitnessapp;
+package com.np.fitnessapp.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.np.fitnessapp.FitnessApp;
 import com.np.fitnessapp.activity.HomeActivity;
 import com.np.fitnessapp.activity.user.UserCreateActivity;
 import com.np.fitnessapp.activity.user.UserSelectActivity;
@@ -18,25 +19,22 @@ import com.np.fitnessapp.database.entity.dao.UserDao;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String APP_PREFERENCES_FILE_KEY = "com.np.fitnessapp.APP_PREFERENCES";
-    public static final String SAVED_USERID_KEY = "savedUseridKey";
-
     private SharedPreferences appPreferences;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        appPreferences = getSharedPreferences(APP_PREFERENCES_FILE_KEY, Context.MODE_PRIVATE);
+        FitnessApp app = FitnessApp.getInstance();
+        appPreferences = getSharedPreferences(FitnessApp.APP_PREFERENCES_FILE_KEY, Context.MODE_PRIVATE);
         AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
         UserDao userDao = db.userDao();
 
-        long savedUserId = appPreferences.getLong(SAVED_USERID_KEY, -1);
+        long savedUserId = appPreferences.getLong(FitnessApp.SAVED_USERID_KEY, -1);
         if (savedUserId != -1) {
             User savedUser = userDao.getUserById(savedUserId);
-            if (user != null) {
-                user = savedUser;
+            if (savedUser != null) {
+                app.setUser(savedUser);
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
                 return;
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent data = result.getData();
                         long userId = data.getLongExtra(UserSelectActivity.SELECTED_USERID_EXTRA, -1);
-                        user = userDao.getUserById(userId);
+                        app.setUser(userDao.getUserById(userId));
                         saveUserId(userId);
                     }
             );
@@ -70,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent data = result.getData();
                         long userId = data.getLongExtra(UserCreateActivity.CREATED_USER_ID_EXTRA, -1);
-                        user = userDao.getUserById(userId);
+                        app.setUser(userDao.getUserById(userId));
                         saveUserId(userId);
                     }
             );
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveUserId(long userId) {
         appPreferences.edit()
-                .putLong(SAVED_USERID_KEY, userId)
+                .putLong(FitnessApp.SAVED_USERID_KEY, userId)
                 .apply();
     }
 }

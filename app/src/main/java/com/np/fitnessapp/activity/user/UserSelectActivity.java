@@ -1,4 +1,4 @@
-package com.np.fitnessapp;
+package com.np.fitnessapp.activity.user;
 
 import android.os.Bundle;
 

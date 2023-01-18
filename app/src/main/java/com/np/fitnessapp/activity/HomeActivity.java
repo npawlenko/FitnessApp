@@ -1,8 +1,10 @@
-package com.np.fitnessapp;
+package com.np.fitnessapp.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.np.fitnessapp.R;
 
 public class HomeActivity extends AppCompatActivity {
 
