@@ -15,4 +15,7 @@
     </string-array>
 
     <string name="fill_all_fields">Uzupełnij wszystkie pola formularza</string>
+
+    <string name="welcome">Witaj, %1$s!</string>
+    <string name="how_did_your_day_look_like">Jak dziś wyglądał twój dzień?</string>
 </resources>
