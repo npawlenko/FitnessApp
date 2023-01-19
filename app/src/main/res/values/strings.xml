@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">FitnessApp</string>
+    <string name="add_user">Dodaj użytkownika</string>
+    <string name="add_user_subheading">i śledź kalorie wielu osób jednocześnie</string>
+    <string name="add">Dodaj</string>
+    <string name="weight">Waga</string>
+    <string name="height">Wzrost</string>
+    <string name="age">Wiek</string>
+    <string name="sex">Płeć</string>
+    <string name="name">Nazwa</string>
+
+    <string-array name="sex_array">
+        <item>Mężczyzna</item>
+        <item>Kobieta</item>
+    </string-array>
+
+    <string name="fill_all_fields">Uzupełnij wszystkie pola formularza</string>
 </resources>

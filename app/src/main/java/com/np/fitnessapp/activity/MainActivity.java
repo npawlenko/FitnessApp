@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
         appPreferences = getSharedPreferences(FitnessApp.APP_PREFERENCES_FILE_KEY, Context.MODE_PRIVATE);
         AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
         UserDao userDao = db.userDao();
+        Intent homeIntent = new Intent(this, HomeActivity.class);
 
         long savedUserId = appPreferences.getLong(FitnessApp.SAVED_USERID_KEY, -1);
         if (savedUserId != -1) {
             User savedUser = userDao.getUserById(savedUserId);
             if (savedUser != null) {
                 app.setUser(savedUser);
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
+                startActivity(homeIntent);
                 return;
             }
         }
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         long userId = data.getLongExtra(UserSelectActivity.SELECTED_USERID_EXTRA, -1);
                         app.setUser(userDao.getUserById(userId));
                         saveUserId(userId);
+                        startActivity(homeIntent);
                     }
             );
 
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         long userId = data.getLongExtra(UserCreateActivity.CREATED_USER_ID_EXTRA, -1);
                         app.setUser(userDao.getUserById(userId));
                         saveUserId(userId);
+                        startActivity(homeIntent);
                     }
             );
 
