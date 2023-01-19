@@ -16,11 +16,13 @@ import java.util.List;
 @Dao
 public interface MealDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertMeals(Meal... meals);
+    long insertMeal(Meal meal);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long[] insertAll(Meal... meals);
     @Update
-    void updateMeals(Meal... meals);
+    void updateMeal(Meal meal);
     @Delete
-    void deleteMeals(Meal... meals);
+    void deleteMeal(Meal meal);
 
 
     @Query("SELECT * FROM meal WHERE meal.mealId = :mealId")

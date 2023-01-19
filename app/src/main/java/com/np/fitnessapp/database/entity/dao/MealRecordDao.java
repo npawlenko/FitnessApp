@@ -18,11 +18,13 @@ import java.util.List;
 @Dao
 public interface MealRecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertMealRecords(MealRecord... record);
+    long insertMealRecord(MealRecord record);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long[] insertAll(MealRecord... records);
     @Update
-    void updateMealRecords(MealRecord... record);
+    void updateMealRecord(MealRecord record);
     @Delete
-    void deleteMealRecords(MealRecord... record);
+    void deleteMealRecord(MealRecord record);
 
     @Query("SELECT * FROM meal_record WHERE mealRecordId = :mealRecordId")
     MealRecord getMealRecordById(long mealRecordId);

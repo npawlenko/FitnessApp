@@ -16,11 +16,13 @@ import java.util.List;
 @Dao
 public interface ExerciseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertExercises(Exercise... exercises);
+    long insertExercises(Exercise exercise);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long[] insertAll(Exercise... exercise);
     @Update
-    void updateExercises(Exercise... exercises);
+    void updateExercises(Exercise exercise);
     @Delete
-    void deleteExercises(Exercise... exercises);
+    void deleteExercises(Exercise exercise);
 
 
     @Query("SELECT * FROM exercise WHERE exercise.exerciseId = :exerciseId")
