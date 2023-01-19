@@ -14,7 +14,6 @@
         style="@style/PoppinsBoldTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:fontFamily="@font/poppins_black"
         android:text="@string/add_user"
         android:textSize="@dimen/heading_size" />
@@ -24,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/section_margin"
-        android:layout_weight="0"
         android:text="@string/add_user_subheading"
         android:textSize="@dimen/subheading_size" />
 
