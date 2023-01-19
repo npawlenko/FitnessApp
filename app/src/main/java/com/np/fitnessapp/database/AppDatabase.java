@@ -2,10 +2,14 @@ package com.np.fitnessapp.database;
 
 import android.content.Context;
 
+import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.room.migration.AutoMigrationSpec;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.np.fitnessapp.database.entity.Exercise;
 import com.np.fitnessapp.database.entity.ExerciseRecord;
@@ -19,6 +23,8 @@ import com.np.fitnessapp.database.entity.dao.MealDao;
 import com.np.fitnessapp.database.entity.dao.MealRecordDao;
 import com.np.fitnessapp.database.entity.dao.UserDao;
 
+import java.io.File;
+
 @Database(
         entities = {
                 User.class,
@@ -28,7 +34,7 @@ import com.np.fitnessapp.database.entity.dao.UserDao;
                 MealRecord.class
         },
         exportSchema = false,
-        version = 1
+        version = 2
 )
 @TypeConverters({
         DateConverter.class
@@ -46,6 +52,9 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 
     public static AppDatabase getDatabase(final Context context) {
+        File databasesDir = new File(context.getApplicationInfo().dataDir + "/databases");
+        new File(databasesDir, "fitnessDb.db").delete();
+
         if (instance != null) {
             return instance;
         }
@@ -53,6 +62,7 @@ public abstract class AppDatabase extends RoomDatabase {
         synchronized (AppDatabase.class) {
             if (instance == null) {
                 instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
+                        .addMigrations(MIGRATION_1_2)
                         .allowMainThreadQueries()
                         .build();
             }
@@ -60,4 +70,12 @@ public abstract class AppDatabase extends RoomDatabase {
             return instance;
         }
     }
+
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE `user` ADD `age` INTEGER DEFAULT 0 NOT NULL");
+        }
+    };
 }

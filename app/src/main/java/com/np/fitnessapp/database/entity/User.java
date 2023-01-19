@@ -15,15 +15,17 @@ public class User {
     public Sex sex;
     public float weight;
     public int height;
+    public int age;
 
 
     public User() {
     }
 
     @Ignore
-    public User(String name, Sex sex, float weight, int height) {
+    public User(String name, Sex sex, int age, float weight, int height) {
         this.name = name;
         this.sex = sex;
+        this.age = age;
         this.weight = weight;
         this.height = height;
     }
