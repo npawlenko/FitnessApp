@@ -17,11 +17,13 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertUsers(User... users);
+    long insertUser(User user);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long[] insertAll(User... users);
     @Update
-    void updateUsers(User... users);
+    void updateUser(User user);
     @Delete
-    void deleteUsers(User... users);
+    void deleteUser(User user);
 
 
     @Query("SELECT * FROM user WHERE user.userId = :userId")
