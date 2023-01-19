@@ -35,6 +35,8 @@ public class HomeActivity extends AppCompatActivity {
         pieChart = findViewById(R.id.home_piechart);
         setupPieChart();
         loadPieChartData();
+
+
     }
 
     private void setupPieChart() {
