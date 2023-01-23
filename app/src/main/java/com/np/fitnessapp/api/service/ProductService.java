@@ -1,6 +1,6 @@
-package com.np.fitnessapp.net.service;
+package com.np.fitnessapp.api.service;
 
-import com.np.fitnessapp.net.ProductContainer;
+import com.np.fitnessapp.api.ProductContainer;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

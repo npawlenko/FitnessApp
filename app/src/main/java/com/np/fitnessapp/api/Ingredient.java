@@ -1,4 +1,4 @@
-package com.np.fitnessapp.net;
+package com.np.fitnessapp.api;
 
 import com.google.gson.annotations.SerializedName;
 
