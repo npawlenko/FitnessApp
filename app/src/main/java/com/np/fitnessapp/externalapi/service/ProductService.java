@@ -1,6 +1,6 @@
-package com.np.fitnessapp.api.service;
+package com.np.fitnessapp.externalapi.service;
 
-import com.np.fitnessapp.api.ProductContainer;
+import com.np.fitnessapp.externalapi.ProductContainer;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
