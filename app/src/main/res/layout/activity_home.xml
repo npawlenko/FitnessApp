@@ -1,75 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/container_margin"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_margin="@dimen/container_margin"
     tools:context=".activity.HomeActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/welcome_textview"
-            style="@style/PoppinsBoldTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/heading_size"
-            tools:text="Witaj, Norbert!" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/section_margin"
-            android:layout_weight="0"
-            android:text="@string/how_did_your_day_look_like"
-            android:textSize="@dimen/subheading_size" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/section_margin"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView4"
-                style="@style/PoppinsBoldTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Podsumowanie"
-                android:textSize="@dimen/heading2_size" />
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/home_piechart"
-                android:layout_width="match_parent"
-                android:layout_height="250dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/section_margin"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView"
-                style="@style/PoppinsBoldTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Posiłki"
-                android:textSize="@dimen/heading2_size" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/meals_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,20 +18,80 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/welcome_textview"
                 style="@style/PoppinsBoldTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ćwiczenia"
-                android:textSize="@dimen/heading2_size" />
+                android:textSize="@dimen/heading_size"
+                tools:text="Witaj, Norbert!" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/exercises_recyclerview"
+            <TextView
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/section_margin"
+                android:layout_weight="0"
+                android:text="@string/how_did_your_day_look_like"
+                android:textSize="@dimen/subheading_size"
+                tools:ignore="InefficientWeight" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/section_margin"
+                android:orientation="vertical">
+
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/home_piechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/section_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    style="@style/PoppinsBoldTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/meals"
+                    android:textSize="@dimen/heading2_size" />
+
+
+                <fragment
+                    android:name="com.np.fitnessapp.fragment.ListMealFragment"
+                    android:id="@+id/mealListFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/PoppinsBoldTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/exercises"
+                    android:textSize="@dimen/heading2_size" />
+
+                <fragment
+                    android:name="com.np.fitnessapp.fragment.ListExerciseFragment"
+                    android:id="@+id/exerciseListFragement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -99,5 +100,4 @@
         android:layout_alignParentBottom="true"
         android:clipToPadding="false"
         app:menu="@menu/bottom_navigation_menu" />
-
 </RelativeLayout>

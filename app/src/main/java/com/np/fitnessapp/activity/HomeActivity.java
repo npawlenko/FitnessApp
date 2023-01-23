@@ -24,8 +24,6 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private RecyclerView mealsRecyclerView;
-    private RecyclerView exercisesRecyclerView;
     private PieChart pieChart;
     private TextView welcomeTextView;
 
@@ -57,9 +55,6 @@ public class HomeActivity extends AppCompatActivity {
         pieChart = findViewById(R.id.home_piechart);
         setupPieChart();
         loadPieChartData();
-
-        mealsRecyclerView = findViewById(R.id.meals_recyclerview);
-        exercisesRecyclerView = findViewById(R.id.exercises_recyclerview);
     }
 
     private void setupPieChart() {

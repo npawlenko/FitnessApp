@@ -21,4 +21,7 @@
     <string name="home">Strona główna</string>
     <string name="users">Użytkownicy</string>
     <string name="diary">Dziennik</string>
+    <string name="meals">Posiłki</string>
+    <string name="exercises">Ćwiczenia</string>
+    <string name="summary">Podsumowanie</string>
 </resources>
