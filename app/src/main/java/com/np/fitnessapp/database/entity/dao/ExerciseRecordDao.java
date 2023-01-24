@@ -10,6 +10,7 @@ import androidx.room.Update;
 
 import com.np.fitnessapp.database.entity.Exercise;
 import com.np.fitnessapp.database.entity.ExerciseRecord;
+import com.np.fitnessapp.database.entity.MealRecord;
 import com.np.fitnessapp.database.entity.relation.ExerciseRecordWithExercise;
 
 import java.util.List;
@@ -29,7 +30,12 @@ public interface ExerciseRecordDao {
     ExerciseRecord getExerciseRecordById(long exerciseRecordId);
     @Query("SELECT * FROM exercise_record")
     List<ExerciseRecord> getAllExerciseRecords();
+    @Query("SELECT * FROM exercise_record WHERE DATE(date) = DATE('now')")
+    List<ExerciseRecord> getTodayExerciseRecords();
     @Transaction
     @Query("SELECT * FROM exercise_record WHERE exerciseRecordId = :exerciseRecordId")
     ExerciseRecordWithExercise getExerciseByExerciseRecordId(long exerciseRecordId);
+    @Transaction
+    @Query("SELECT * FROM exercise_record WHERE DATE(date) = DATE('now')")
+    List<ExerciseRecordWithExercise> getTodayExerciseRecordWithExercise();
 }

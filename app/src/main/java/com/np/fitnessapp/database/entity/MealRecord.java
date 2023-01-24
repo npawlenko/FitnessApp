@@ -1,5 +1,6 @@
 package com.np.fitnessapp.database.entity;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;

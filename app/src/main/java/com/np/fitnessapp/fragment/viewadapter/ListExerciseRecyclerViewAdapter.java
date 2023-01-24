@@ -1,5 +1,6 @@
 package com.np.fitnessapp.fragment.viewadapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.np.fitnessapp.database.entity.relation.ExerciseRecordWithExercise;
 import com.np.fitnessapp.databinding.FragmentExerciseBinding;
 import com.np.fitnessapp.fragment.placeholder.PlaceholderContent.PlaceholderItem;
 
@@ -18,9 +20,9 @@ import java.util.List;
  */
 public class ListExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ListExerciseRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<ExerciseRecordWithExercise> mValues;
 
-    public ListExerciseRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public ListExerciseRecyclerViewAdapter(List<ExerciseRecordWithExercise> items) {
         mValues = items;
     }
 
@@ -32,11 +34,12 @@ public class ListExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ListEx
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.item = mValues.get(position);
+        holder.mIdView.setText(mValues.get(position).exercise.exerciseId + "");
+        holder.mContentView.setText(mValues.get(position).exercise.name);
     }
 
     @Override
@@ -47,7 +50,7 @@ public class ListExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ListEx
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public ExerciseRecordWithExercise item;
 
         public ViewHolder(FragmentExerciseBinding binding) {
             super(binding.getRoot());

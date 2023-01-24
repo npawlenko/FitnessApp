@@ -28,7 +28,7 @@ public interface ExerciseDao {
     @Query("SELECT * FROM exercise WHERE exercise.exerciseId = :exerciseId")
     Exercise getExerciseById(long exerciseId);
     @Query("SELECT * FROM exercise")
-    List<Exercise> getExercises();
+    List<Exercise> getAllExercises();
     @Transaction
     @Query("SELECT * FROM exercise")
     List<ExerciseWithExerciseRecords> getAllExerciseWithExerciseRecords();

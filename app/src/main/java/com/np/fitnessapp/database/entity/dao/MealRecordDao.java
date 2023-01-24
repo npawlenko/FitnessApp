@@ -30,7 +30,12 @@ public interface MealRecordDao {
     MealRecord getMealRecordById(long mealRecordId);
     @Query("SELECT * FROM meal_record")
     List<MealRecord> getAllMealRecords();
+    @Query("SELECT * FROM meal_record WHERE DATE(date) = DATE('now')")
+    List<MealRecord> getTodayMealRecords();
     @Transaction
     @Query("SELECT * FROM meal_record WHERE mealRecordId = :mealRecordId")
-    MealRecordWithMeal getAllMealRecordsWithMeal(long mealRecordId);
+    MealRecordWithMeal getMealRecordWithMeal(long mealRecordId);
+    @Transaction
+    @Query("SELECT * FROM meal_record WHERE DATE(date) = DATE('now')")
+    List<MealRecordWithMeal> getTodayMealRecordsWithMeal();
 }

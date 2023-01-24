@@ -8,17 +8,23 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.np.fitnessapp.R;
+import com.np.fitnessapp.database.AppDatabase;
+import com.np.fitnessapp.database.entity.MealRecord;
+import com.np.fitnessapp.database.entity.dao.MealDao;
+import com.np.fitnessapp.database.entity.dao.MealRecordDao;
+import com.np.fitnessapp.database.entity.relation.MealRecordWithMeal;
 import com.np.fitnessapp.fragment.placeholder.PlaceholderContent;
 import com.np.fitnessapp.fragment.viewadapter.ListMealRecyclerViewAdapter;
 
-/**
- * A fragment representing a list of Items.
- */
+import java.util.List;
+
 public class ListMealFragment extends Fragment {
 
     // TODO: Customize parameter argument names
@@ -26,14 +32,12 @@ public class ListMealFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    private TextView emptyTextView;
+
+
     public ListMealFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static ListMealFragment newInstance(int columnCount) {
         ListMealFragment fragment = new ListMealFragment();
@@ -56,17 +60,21 @@ public class ListMealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meal_list, container, false);
+        emptyTextView = view.findViewById(R.id.emptyMealsTextView);
+
+        MealRecordDao mealRecordDao = AppDatabase.getDatabase(getContext()).mealRecordDao();
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new ListMealRecyclerViewAdapter(PlaceholderContent.ITEMS));
+        Context context = view.getContext();
+        RecyclerView recyclerView = view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        List<MealRecordWithMeal> records =  mealRecordDao.getTodayMealRecordsWithMeal();
+        if(records.isEmpty()) {
+            emptyTextView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setAdapter(new ListMealRecyclerViewAdapter(records));
         }
         return view;
     }

@@ -24,4 +24,6 @@
     <string name="meals">Posiłki</string>
     <string name="exercises">Ćwiczenia</string>
     <string name="summary">Podsumowanie</string>
+    <string name="empty_today_meals">Brak posiłków dzisiaj</string>
+    <string name="empty_exercises_today">Brak ćwiczeń dzisiaj</string>
 </resources>

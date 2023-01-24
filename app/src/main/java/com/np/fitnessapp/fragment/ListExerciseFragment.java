@@ -11,63 +11,62 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.np.fitnessapp.R;
+import com.np.fitnessapp.database.AppDatabase;
+import com.np.fitnessapp.database.entity.dao.ExerciseRecordDao;
+import com.np.fitnessapp.database.entity.relation.ExerciseRecordWithExercise;
+import com.np.fitnessapp.database.entity.relation.MealRecordWithMeal;
 import com.np.fitnessapp.fragment.placeholder.PlaceholderContent;
 import com.np.fitnessapp.fragment.viewadapter.ListExerciseRecyclerViewAdapter;
+import com.np.fitnessapp.fragment.viewadapter.ListMealRecyclerViewAdapter;
+
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
  */
 public class ListExerciseFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private TextView emptyTextView;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
+
+
+
     public ListExerciseFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static ListExerciseFragment newInstance(int columnCount) {
-        ListExerciseFragment fragment = new ListExerciseFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+//
+//        if (getArguments() != null) {
+//            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_list, container, false);
+        emptyTextView = view.findViewById(R.id.emptyExercisesTextView);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new ListExerciseRecyclerViewAdapter(PlaceholderContent.ITEMS));
+        ExerciseRecordDao exerciseRecordDao = AppDatabase.getDatabase(getContext()).exerciseRecordDao();
+
+        Context context = view.getContext();
+        RecyclerView recyclerView = view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        List<ExerciseRecordWithExercise> records =  exerciseRecordDao.getTodayExerciseRecordWithExercise();
+        if(records.isEmpty()) {
+            emptyTextView.setVisibility(View.VISIBLE);
         }
+        else {
+            recyclerView.setAdapter(new ListExerciseRecyclerViewAdapter(records));
+        }
+
         return view;
     }
 }

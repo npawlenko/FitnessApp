@@ -2,6 +2,7 @@ package com.np.fitnessapp.database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -62,7 +63,9 @@ public abstract class AppDatabase extends RoomDatabase {
         synchronized (AppDatabase.class) {
             if (instance == null) {
                 instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
-                        .addMigrations(MIGRATION_1_2)
+                        .addMigrations(
+                                MIGRATION_1_2
+                        )
                         .allowMainThreadQueries()
                         .build();
             }

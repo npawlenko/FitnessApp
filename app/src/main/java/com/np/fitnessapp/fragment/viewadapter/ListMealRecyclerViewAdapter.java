@@ -1,27 +1,24 @@
 package com.np.fitnessapp.fragment.viewadapter;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.np.fitnessapp.database.entity.relation.MealRecordWithMeal;
 import com.np.fitnessapp.databinding.FragmentMealBinding;
-import com.np.fitnessapp.fragment.placeholder.PlaceholderContent.PlaceholderItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class ListMealRecyclerViewAdapter extends RecyclerView.Adapter<ListMealRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<MealRecordWithMeal> mealRecords;
 
-    public ListMealRecyclerViewAdapter(List<PlaceholderItem> items) {
-        mValues = items;
+    public ListMealRecyclerViewAdapter(List<MealRecordWithMeal> items) {
+        mealRecords = items;
     }
 
     @NonNull
@@ -32,22 +29,23 @@ public class ListMealRecyclerViewAdapter extends RecyclerView.Adapter<ListMealRe
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mealRecord = mealRecords.get(position);
+        holder.mIdView.setText("" + mealRecords.get(position).meal.mealId);
+        holder.mContentView.setText(mealRecords.get(position).meal.name);
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mealRecords.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public MealRecordWithMeal mealRecord;
 
         public ViewHolder(FragmentMealBinding binding) {
             super(binding.getRoot());

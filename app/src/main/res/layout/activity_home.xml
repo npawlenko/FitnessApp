@@ -62,7 +62,6 @@
                     android:text="@string/meals"
                     android:textSize="@dimen/heading2_size" />
 
-
                 <fragment
                     android:name="com.np.fitnessapp.fragment.ListMealFragment"
                     android:id="@+id/mealListFragment"
@@ -82,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/exercises"
                     android:textSize="@dimen/heading2_size" />
+
 
                 <fragment
                     android:name="com.np.fitnessapp.fragment.ListExerciseFragment"
