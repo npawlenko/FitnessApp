@@ -1,8 +1,11 @@
-package com.np.fitnessapp.activity.user;
+package com.np.fitnessapp.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +14,6 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.np.fitnessapp.FitnessApp;
 import com.np.fitnessapp.R;
 import com.np.fitnessapp.database.AppDatabase;
 import com.np.fitnessapp.database.entity.Sex;
@@ -28,7 +30,7 @@ public class UserCreateActivity extends AppCompatActivity {
     private EditText weightInput;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
@@ -38,18 +40,19 @@ public class UserCreateActivity extends AppCompatActivity {
         weightInput = findViewById(R.id.add_user_weight_edittext);
         sexInput = findViewById(R.id.add_user_sex_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
+                getApplicationContext(),
                 R.array.sex_array,
                 R.layout.spinner_item
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sexInput.setAdapter(adapter);
 
+
         Button addButton = findViewById(R.id.add_user_button);
-        addButton.setOnClickListener(view -> {
+        addButton.setOnClickListener(v -> {
             if(!validateFields()) {
                 Snackbar.make(
-                        findViewById(R.id.add_user_container),
+                        v.findViewById(R.id.add_user_container),
                         getString(R.string.fill_all_fields),
                         Snackbar.LENGTH_LONG
                 ).show();
@@ -66,14 +69,16 @@ public class UserCreateActivity extends AppCompatActivity {
         });
     }
 
+
+
     private User inputDataToUser() {
         Sex sex;
         switch(sexInput.getSelectedItemPosition()) {
             case 0:
-                sex = Sex.FEMALE;
+                sex = Sex.MALE;
                 break;
             default:
-                sex = Sex.MALE;
+                sex = Sex.FEMALE;
         }
 
         return new User(

@@ -13,28 +13,28 @@
         android:theme="@style/Theme.FitnessApp"
         tools:targetApi="31">
         <activity
-            android:name=".activity.DiaryActivity"
+            android:name=".activity.fragment.DiaryFragment"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".activity.fragment.HomeFragment"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.user.UserCreateActivity"
+            android:name=".activity.UserCreateActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.user.UserSelectActivity"
+            android:name=".activity.fragment.UserSelectFragment"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

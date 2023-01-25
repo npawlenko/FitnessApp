@@ -34,7 +34,7 @@ import java.io.File;
                 Meal.class,
                 MealRecord.class
         },
-        exportSchema = false,
+        exportSchema = true,
         version = 2
 )
 @TypeConverters({
@@ -53,9 +53,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 
     public static AppDatabase getDatabase(final Context context) {
-        File databasesDir = new File(context.getApplicationInfo().dataDir + "/databases");
-        new File(databasesDir, "fitnessDb.db").delete();
-
         if (instance != null) {
             return instance;
         }

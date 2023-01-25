@@ -1,12 +1,13 @@
-package com.np.fitnessapp.activity;
+package com.np.fitnessapp.activity.fragment;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -15,44 +16,38 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.np.fitnessapp.FitnessApp;
 import com.np.fitnessapp.R;
-import com.np.fitnessapp.activity.user.UserSelectActivity;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeFragment extends Fragment {
 
     private PieChart pieChart;
     private TextView welcomeTextView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         FitnessApp app = FitnessApp.getInstance();
-
-        BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
-        bottomNavigation.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            switch(id){
-                case R.id.page_2:
-                    Intent diaryIntent = new Intent(this, DiaryActivity.class);
-                    startActivity(diaryIntent);
-                    break;
-                case R.id.page_3:
-                    Intent userSelectIntent = new Intent(this, UserSelectActivity.class);
-                    startActivity(userSelectIntent);
-                default:
-            }
-            return true;
-        });
-
-        welcomeTextView = findViewById(R.id.welcome_textview);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        welcomeTextView = view.findViewById(R.id.welcome_textview);
         welcomeTextView.setText(getString(R.string.welcome, app.getUser().name));
+        pieChart = view.findViewById(R.id.home_piechart);
 
-        pieChart = findViewById(R.id.home_piechart);
+        setupPieChart();
+        loadPieChartData();
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         setupPieChart();
         loadPieChartData();
     }

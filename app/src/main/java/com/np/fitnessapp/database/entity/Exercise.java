@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey;
         }
 )
 public class Exercise {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long exerciseId;
     public String name;
     public int caloriesPerHour;

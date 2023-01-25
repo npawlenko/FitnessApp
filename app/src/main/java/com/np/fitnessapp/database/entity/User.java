@@ -9,7 +9,7 @@ import com.np.fitnessapp.database.exception.InvalidGenderException;
 
 @Entity(tableName = "user")
 public class User {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long userId;
     public String name;
     public Sex sex;

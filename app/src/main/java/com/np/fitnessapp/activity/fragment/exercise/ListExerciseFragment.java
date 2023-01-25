@@ -1,10 +1,9 @@
-package com.np.fitnessapp.fragment;
+package com.np.fitnessapp.activity.fragment.exercise;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,10 +16,7 @@ import com.np.fitnessapp.R;
 import com.np.fitnessapp.database.AppDatabase;
 import com.np.fitnessapp.database.entity.dao.ExerciseRecordDao;
 import com.np.fitnessapp.database.entity.relation.ExerciseRecordWithExercise;
-import com.np.fitnessapp.database.entity.relation.MealRecordWithMeal;
-import com.np.fitnessapp.fragment.placeholder.PlaceholderContent;
-import com.np.fitnessapp.fragment.viewadapter.ListExerciseRecyclerViewAdapter;
-import com.np.fitnessapp.fragment.viewadapter.ListMealRecyclerViewAdapter;
+import com.np.fitnessapp.ui.viewadapter.ListExerciseRecyclerViewAdapter;
 
 import java.util.List;
 
@@ -30,10 +26,6 @@ import java.util.List;
 public class ListExerciseFragment extends Fragment {
 
     private TextView emptyTextView;
-
-
-
-
 
     public ListExerciseFragment() {
     }

@@ -19,7 +19,7 @@ import java.util.Date;
         }
 )
 public class ExerciseRecord {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long exerciseRecordId;
     public long exerciseId;
     public int totalCalories;

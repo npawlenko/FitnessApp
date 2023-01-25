@@ -1,4 +1,4 @@
-package com.np.fitnessapp.fragment.viewadapter;
+package com.np.fitnessapp.ui.viewadapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;

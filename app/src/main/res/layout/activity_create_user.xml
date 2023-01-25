@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/container_margin"
     android:orientation="vertical"
-    tools:context=".activity.user.UserCreateActivity">
+    tools:context=".activity.UserCreateActivity">
 
     <TextView
         android:id="@+id/add_user_textview"

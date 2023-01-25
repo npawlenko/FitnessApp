@@ -26,4 +26,7 @@
     <string name="summary">Podsumowanie</string>
     <string name="empty_today_meals">Brak posiłków dzisiaj</string>
     <string name="empty_exercises_today">Brak ćwiczeń dzisiaj</string>
+    <string name="choose_user_subheading">aby zarządzać jego dniem</string>
+    <string name="choose_user">Wybierz użytkownika</string>
+    <string name="choose_user_first">Najpierw wybierz użytkownika!</string>
 </resources>

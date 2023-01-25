@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
         }
 )
 public class Meal {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long mealId;
     public String name;
     public int calories;

@@ -21,7 +21,7 @@ public class FitnessApp {
 
 
     public static final String APP_PREFERENCES_FILE_KEY = "com.np.fitnessapp.APP_PREFERENCES";
-    public static final String SAVED_USERID_KEY = "savedUseridKey";
+    public static final String SAVED_USERID_KEY = "savedUserIdKey";
 
     private User user;
 

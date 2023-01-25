@@ -1,8 +1,8 @@
 package com.np.fitnessapp.database.entity;
 
 public enum Sex {
-    MALE("male"),
-    FEMALE("female");
+    MALE("MALE"),
+    FEMALE("FEMALE");
 
     private final String value;
 

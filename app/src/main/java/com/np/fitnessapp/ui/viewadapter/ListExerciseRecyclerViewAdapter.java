@@ -1,4 +1,4 @@
-package com.np.fitnessapp.fragment.viewadapter;
+package com.np.fitnessapp.ui.viewadapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -10,14 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.np.fitnessapp.database.entity.relation.ExerciseRecordWithExercise;
 import com.np.fitnessapp.databinding.FragmentExerciseBinding;
-import com.np.fitnessapp.fragment.placeholder.PlaceholderContent.PlaceholderItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class ListExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ListExerciseRecyclerViewAdapter.ViewHolder> {
 
     private final List<ExerciseRecordWithExercise> mValues;

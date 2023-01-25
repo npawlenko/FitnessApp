@@ -19,7 +19,7 @@ import java.util.Date;
         }
 )
 public class MealRecord {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long mealRecordId;
     public long mealId;
     public Date date;
