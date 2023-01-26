@@ -33,8 +33,10 @@ public class ListMealRecyclerViewAdapter extends RecyclerView.Adapter<ListMealRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mealRecord = mealRecords.get(position);
-        holder.mIdView.setText("" + mealRecords.get(position).meal.mealId);
-        holder.mContentView.setText(mealRecords.get(position).meal.name);
+        if(holder.mealRecord != null) {
+            holder.mIdView.setText("" + mealRecords.get(position).meal.mealId);
+            holder.mContentView.setText(mealRecords.get(position).meal.name);
+        }
     }
 
     @Override

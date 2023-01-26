@@ -13,7 +13,7 @@ public class ExerciseWithExerciseRecords {
     public Exercise exercise;
     @Relation(
             parentColumn = "exerciseId",
-            entityColumn = "exerciseRecordId"
+            entityColumn = "exerciseId"
     )
     public List<ExerciseRecord> records;
 }

@@ -10,7 +10,7 @@ public class MealRecordWithMeal {
     @Embedded
     public MealRecord mealRecord;
     @Relation(
-            parentColumn = "mealRecordId",
+            parentColumn = "mealId",
             entityColumn = "mealId"
     )
     public Meal meal;

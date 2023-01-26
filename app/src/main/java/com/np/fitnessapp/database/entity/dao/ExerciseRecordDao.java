@@ -30,12 +30,12 @@ public interface ExerciseRecordDao {
     ExerciseRecord getExerciseRecordById(long exerciseRecordId);
     @Query("SELECT * FROM exercise_record")
     List<ExerciseRecord> getAllExerciseRecords();
-    @Query("SELECT * FROM exercise_record WHERE DATE(date) = DATE('now')")
+    @Query("SELECT * FROM exercise_record WHERE DATE(date/1000, 'unixepoch') = DATE('now')")
     List<ExerciseRecord> getTodayExerciseRecords();
     @Transaction
     @Query("SELECT * FROM exercise_record WHERE exerciseRecordId = :exerciseRecordId")
     ExerciseRecordWithExercise getExerciseByExerciseRecordId(long exerciseRecordId);
     @Transaction
-    @Query("SELECT * FROM exercise_record WHERE DATE(date) = DATE('now')")
+    @Query("SELECT * FROM exercise_record WHERE DATE(date/1000, 'unixepoch') = DATE('now')")
     List<ExerciseRecordWithExercise> getTodayExerciseRecordWithExercise();
 }

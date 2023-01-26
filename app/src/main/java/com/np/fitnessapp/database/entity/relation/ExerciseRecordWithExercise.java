@@ -10,7 +10,7 @@ public class ExerciseRecordWithExercise {
     @Embedded
     public ExerciseRecord exerciseRecord;
     @Relation(
-            parentColumn = "exerciseRecordId",
+            parentColumn = "exerciseId",
             entityColumn = "exerciseId"
     )
     public Exercise exercise;

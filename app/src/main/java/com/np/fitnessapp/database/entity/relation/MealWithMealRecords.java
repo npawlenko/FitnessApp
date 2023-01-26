@@ -13,7 +13,7 @@ public class MealWithMealRecords {
     public Meal meal;
     @Relation(
             parentColumn = "mealId",
-            entityColumn = "mealRecordId"
+            entityColumn = "mealId"
     )
     public List<MealRecord> records;
 }

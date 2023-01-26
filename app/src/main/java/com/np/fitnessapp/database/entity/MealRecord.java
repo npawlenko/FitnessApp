@@ -1,5 +1,6 @@
 package com.np.fitnessapp.database.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -15,6 +16,12 @@ import java.util.Date;
                         parentColumns = "mealId",
                         childColumns = "mealId",
                         onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = User.class,
+                        parentColumns = "userId",
+                        childColumns = "userId",
+                        onDelete = ForeignKey.CASCADE
                 )
         }
 )
@@ -25,4 +32,6 @@ public class MealRecord {
     public Date date;
     public int portions;
     public int totalCalories;
+    @ColumnInfo(defaultValue = "1")
+    public long userId;
 }
