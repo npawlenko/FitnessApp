@@ -19,14 +19,15 @@ public class Meal {
     public int calories;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     public byte[] icon;
+    public String iconUrl;
 
     public Meal() {
     }
 
     @Ignore
-    public Meal(String name, int calories, byte[] icon) {
+    public Meal(String name, int calories, String iconUrl) {
         this.name = name;
         this.calories = calories;
-        this.icon = icon;
+        this.iconUrl = iconUrl;
     }
 }

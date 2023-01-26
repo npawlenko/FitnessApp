@@ -114,6 +114,7 @@ public class UserSelectFragment extends Fragment {
                 adapter.notifyDataSetChanged();
 
                 if(user.userId == FitnessApp.getInstance().getUser().userId) {
+                    FitnessApp.getInstance().setUser(null);
                     SharedPreferences appSharedPreferences = getActivity().getSharedPreferences(FitnessApp.APP_PREFERENCES_FILE_KEY, Context.MODE_PRIVATE);
                     appSharedPreferences.edit().remove(FitnessApp.SAVED_USERID_KEY).commit();
                 }

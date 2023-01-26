@@ -9,6 +9,7 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.np.fitnessapp.database.entity.Exercise;
+import com.np.fitnessapp.database.entity.Meal;
 import com.np.fitnessapp.database.entity.relation.ExerciseWithExerciseRecords;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public interface ExerciseDao {
     Exercise getExerciseById(long exerciseId);
     @Query("SELECT * FROM exercise")
     List<Exercise> getAllExercises();
+    @Query("SELECT * FROM exercise WHERE name LIKE '%' || :like || '%'")
+    List<Exercise> getExercisesLike(String like);
     @Transaction
     @Query("SELECT * FROM exercise")
     List<ExerciseWithExerciseRecords> getAllExerciseWithExerciseRecords();

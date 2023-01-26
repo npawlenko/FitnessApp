@@ -14,10 +14,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.snackbar.Snackbar;
 import com.np.fitnessapp.FitnessApp;
 import com.np.fitnessapp.R;
-import com.np.fitnessapp.activity.fragment.DiaryFragment;
+import com.np.fitnessapp.activity.fragment.JournalFragment;
 import com.np.fitnessapp.activity.fragment.HomeFragment;
 import com.np.fitnessapp.activity.fragment.UserSelectFragment;
 import com.np.fitnessapp.database.AppDatabase;
@@ -83,6 +82,13 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if(FitnessApp.getInstance().getUser() != null) {
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                     fragmentTransaction.replace(R.id.fragment_container, homeFragment).commit();
                     break;
                 case R.id.page_diary:
-                    DiaryFragment diaryFragment = new DiaryFragment();
+                    JournalFragment diaryFragment = new JournalFragment();
                     fragmentTransaction.replace(R.id.fragment_container, diaryFragment).commit();
                     break;
                 case R.id.page_users:

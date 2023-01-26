@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/container_margin"
+        android:orientation="vertical"
+        tools:context=".activity.ExerciseAddActivity">
+
+        <TextView
+            android:id="@+id/add_user_textview"
+            style="@style/PoppinsBoldTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_black"
+            android:layout_marginBottom="@dimen/section_margin"
+            android:text="@string/add_meal"
+            android:textSize="@dimen/heading_size" />
+
+        <TextView
+            android:id="@+id/t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search" />
+
+        <SearchView
+            android:id="@+id/searchMeals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_input"
+            android:ems="10"
+            android:hint="@string/search"
+            android:inputType="textPersonName"
+            android:padding="@dimen/input_padding"
+            android:textSize="@dimen/input_text_size" />
+
+
+        <ListView
+            android:id="@+id/mealSearchList"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="@dimen/section_margin" />
+
+
+    </LinearLayout>
+</ScrollView>

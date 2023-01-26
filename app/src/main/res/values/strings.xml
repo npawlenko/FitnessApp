@@ -29,4 +29,10 @@
     <string name="choose_user_subheading">aby zarządzać jego dniem</string>
     <string name="choose_user">Wybierz użytkownika</string>
     <string name="choose_user_first">Najpierw wybierz użytkownika!</string>
+    <string name="search">Wyszukaj</string>
+    <string name="exercise_add">Dodaj ćwiczenie</string>
+    <string name="add_exercise">Dodaj ćwiczenie</string>
+    <string name="add_meal">Dodaj posiłek</string>
+    <string name="journal">Dziennik</string>
+    <string name="journal_subheading">notuj swoje posiłki i aktywności</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.np.fitnessapp.externalapi;
+package com.np.fitnessapp.api.food;
 
 import com.google.gson.annotations.SerializedName;
 

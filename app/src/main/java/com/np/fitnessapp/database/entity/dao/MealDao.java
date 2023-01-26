@@ -29,6 +29,8 @@ public interface MealDao {
     Meal getMealById(long mealId);
     @Query("SELECT * FROM meal")
     List<Meal> getAllMeals();
+    @Query("SELECT * FROM meal WHERE name LIKE '%' || :like || '%'")
+    List<Meal> getMealsLike(String like);
     @Transaction
     @Query("SELECT * FROM meal")
     List<MealWithMealRecords> getAllMealWithMealRecords();

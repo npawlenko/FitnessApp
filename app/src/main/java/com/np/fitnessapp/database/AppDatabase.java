@@ -35,7 +35,7 @@ import java.io.File;
                 MealRecord.class
         },
         exportSchema = true,
-        version = 2
+        version = 3
 )
 @TypeConverters({
         DateConverter.class
@@ -61,7 +61,8 @@ public abstract class AppDatabase extends RoomDatabase {
             if (instance == null) {
                 instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
                         .addMigrations(
-                                MIGRATION_1_2
+                                MIGRATION_1_2,
+                                MIGRATION_2_3
                         )
                         .allowMainThreadQueries()
                         .build();
@@ -76,6 +77,13 @@ public abstract class AppDatabase extends RoomDatabase {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE `user` ADD `age` INTEGER DEFAULT 0 NOT NULL");
+        }
+    };
+
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE `meal` ADD `iconUrl` TEXT");
         }
     };
 }
