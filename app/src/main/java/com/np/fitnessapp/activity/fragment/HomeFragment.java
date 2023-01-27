@@ -18,8 +18,12 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.np.fitnessapp.FitnessApp;
 import com.np.fitnessapp.R;
+import com.np.fitnessapp.database.AppDatabase;
+import com.np.fitnessapp.database.entity.relation.ExerciseRecordWithExercise;
+import com.np.fitnessapp.database.entity.relation.MealRecordWithMeal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -64,9 +68,20 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadPieChartData() {
+        AppDatabase db = AppDatabase.getDatabase(getContext());
+        List<MealRecordWithMeal> todayMeals = db.mealRecordDao().getTodayMealRecordsWithMeal();
+        List<ExerciseRecordWithExercise> todayExercises = db.exerciseRecordDao().getTodayExerciseRecordWithExercise();
+
+        int caloriesBurn = 0;
+        int caloriesEaten = 0;
+        for(MealRecordWithMeal m : todayMeals) caloriesEaten += m.meal.calories;
+        for(ExerciseRecordWithExercise e : todayExercises) caloriesBurn += e.exercise.caloriesPerHour;
+
+        int caloriesTotal = caloriesBurn + caloriesEaten;
+
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(0.2f, "Spalone kalorie"));
-        entries.add(new PieEntry(0.6f, "Spożyte kalorie"));
+        entries.add(new PieEntry((float) (caloriesBurn*100)/caloriesTotal, "Spalone kalorie"));
+        entries.add(new PieEntry((float) (caloriesEaten*100)/caloriesTotal, "Spożyte kalorie"));
 
         ArrayList<Integer> colors = new ArrayList<>();
         for (int color: ColorTemplate.MATERIAL_COLORS) {
