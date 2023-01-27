@@ -13,17 +13,16 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
+import com.np.fitnessapp.FitnessApp;
 import com.np.fitnessapp.R;
 import com.np.fitnessapp.activity.ExerciseAddActivity;
 import com.np.fitnessapp.activity.MealAddActivity;
-import com.np.fitnessapp.activity.UserCreateActivity;
 import com.np.fitnessapp.database.AppDatabase;
 import com.np.fitnessapp.database.entity.Exercise;
 import com.np.fitnessapp.database.entity.ExerciseRecord;
 import com.np.fitnessapp.database.entity.Meal;
 import com.np.fitnessapp.database.entity.MealRecord;
 import com.np.fitnessapp.database.entity.dao.ExerciseRecordDao;
-import com.np.fitnessapp.database.entity.dao.MealDao;
 import com.np.fitnessapp.database.entity.dao.MealRecordDao;
 
 import java.util.Date;
@@ -57,6 +56,7 @@ public class JournalFragment extends Fragment {
                     mealRecord.mealId = mealId;
                     mealRecord.date = new Date();
                     mealRecord.portions = 1;
+                    mealRecord.userId = FitnessApp.getInstance().getUser().userId;
                     mealRecord.totalCalories = meal.calories;
                     mealRecordDao.insertMealRecord(mealRecord);
                 }
@@ -79,6 +79,7 @@ public class JournalFragment extends Fragment {
                     exerciseRecord.exerciseId = exerciseId;
                     exerciseRecord.date = new Date();
                     exerciseRecord.totalHours = 1;
+                    exerciseRecord.userId = FitnessApp.getInstance().getUser().userId;
                     exerciseRecord.totalCalories = exercise.caloriesPerHour;
                     exerciseRecordDao.insertExerciseRecord(exerciseRecord);
                 }
