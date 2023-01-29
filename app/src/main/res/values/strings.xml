@@ -35,4 +35,6 @@
     <string name="add_meal">Dodaj posiłek</string>
     <string name="journal">Dziennik</string>
     <string name="journal_subheading">notuj swoje posiłki i aktywności</string>
+    <string name="burnt_calories_per_hour">Kalorie na godzine:</string>
+    <string name="calories">Kaloryczność:</string>
 </resources>

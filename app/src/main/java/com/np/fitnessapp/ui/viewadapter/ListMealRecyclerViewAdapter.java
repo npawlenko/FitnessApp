@@ -1,13 +1,17 @@
 package com.np.fitnessapp.ui.viewadapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.np.fitnessapp.activity.ExerciseActivity;
+import com.np.fitnessapp.activity.MealActivity;
 import com.np.fitnessapp.database.entity.relation.MealRecordWithMeal;
 import com.np.fitnessapp.databinding.FragmentMealBinding;
 
@@ -44,7 +48,7 @@ public class ListMealRecyclerViewAdapter extends RecyclerView.Adapter<ListMealRe
         return mealRecords.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView mIdView;
         public final TextView mContentView;
         public MealRecordWithMeal mealRecord;
@@ -53,6 +57,14 @@ public class ListMealRecyclerViewAdapter extends RecyclerView.Adapter<ListMealRe
             super(binding.getRoot());
             mIdView = binding.itemNumber;
             mContentView = binding.content;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), MealActivity.class);
+            intent.putExtra(MealActivity.MEAL_ID_EXTRA, mealRecord.meal.mealId);
+            view.getContext().startActivity(intent);
         }
 
         @Override
