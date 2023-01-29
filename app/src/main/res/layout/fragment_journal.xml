@@ -58,12 +58,15 @@
                 android:text="@string/meals"
                 android:textSize="@dimen/heading2_size" />
 
-            <fragment
-                android:name="com.np.fitnessapp.activity.fragment.meal.ListMealFragment"
-                android:id="@+id/mealListFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_meal_list" />
+                <FrameLayout
+                    android:id="@+id/journal_meallist_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,12 +83,15 @@
                 android:textSize="@dimen/heading2_size" />
 
 
-            <fragment
-                android:name="com.np.fitnessapp.activity.fragment.exercise.ListExerciseFragment"
-                android:id="@+id/exerciseListFragement"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_exercise_list" />
+                <FrameLayout
+                    android:id="@+id/journal_exerciselist_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
     </LinearLayout>

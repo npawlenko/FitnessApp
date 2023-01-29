@@ -1,8 +1,10 @@
 package com.np.fitnessapp.activity.fragment.meal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,8 @@ import java.util.List;
 public class ListMealFragment extends Fragment {
 
     private TextView emptyTextView;
+    private RecyclerView recyclerView;
+    private ListMealRecyclerViewAdapter adapter;
 
 
     public ListMealFragment() {
@@ -48,17 +52,33 @@ public class ListMealFragment extends Fragment {
         MealRecordDao mealRecordDao = AppDatabase.getDatabase(getContext()).mealRecordDao();
 
         // Set the adapter
-        Context context = view.getContext();
-        RecyclerView recyclerView = view.findViewById(R.id.list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView = view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<MealRecordWithMeal> records =  mealRecordDao.getTodayMealRecordsWithMeal();
         if(records.isEmpty()) {
             emptyTextView.setVisibility(View.VISIBLE);
         }
         else {
-            recyclerView.setAdapter(new ListMealRecyclerViewAdapter(records));
+            adapter = new ListMealRecyclerViewAdapter(records);
+            recyclerView.setAdapter(adapter);
         }
         return view;
+    }
+
+    public void updateView() {
+        MealRecordDao mealRecordDao = AppDatabase.getDatabase(getContext()).mealRecordDao();
+        List<MealRecordWithMeal> records =  mealRecordDao.getTodayMealRecordsWithMeal();
+
+        if(adapter == null) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            adapter = new ListMealRecyclerViewAdapter(records);
+            recyclerView.setAdapter(adapter);
+            return;
+        }
+
+        adapter = new ListMealRecyclerViewAdapter(records);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }

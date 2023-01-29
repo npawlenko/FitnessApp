@@ -12,11 +12,15 @@ import android.widget.Button;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.np.fitnessapp.FitnessApp;
 import com.np.fitnessapp.R;
 import com.np.fitnessapp.activity.ExerciseAddActivity;
 import com.np.fitnessapp.activity.MealAddActivity;
+import com.np.fitnessapp.activity.fragment.exercise.ListExerciseFragment;
+import com.np.fitnessapp.activity.fragment.meal.ListMealFragment;
 import com.np.fitnessapp.database.AppDatabase;
 import com.np.fitnessapp.database.entity.Exercise;
 import com.np.fitnessapp.database.entity.ExerciseRecord;
@@ -31,6 +35,10 @@ public class JournalFragment extends Fragment {
 
     private Button addMealButton;
     private Button addExerciseButton;
+
+    private FragmentManager fragmentManager;
+    private ListMealFragment listMealFragment;
+    private ListExerciseFragment listExerciseFragment;
 
     private ActivityResultLauncher<Intent> selectMealLauncher;
     private ActivityResultLauncher<Intent> selectExerciseLauncher;
@@ -59,6 +67,7 @@ public class JournalFragment extends Fragment {
                     mealRecord.userId = FitnessApp.getInstance().getUser().userId;
                     mealRecord.totalCalories = meal.calories;
                     mealRecordDao.insertMealRecord(mealRecord);
+                    listMealFragment.updateView();
                 }
         );
 
@@ -82,8 +91,13 @@ public class JournalFragment extends Fragment {
                     exerciseRecord.userId = FitnessApp.getInstance().getUser().userId;
                     exerciseRecord.totalCalories = exercise.caloriesPerHour;
                     exerciseRecordDao.insertExerciseRecord(exerciseRecord);
+                    listExerciseFragment.updateView();
                 }
         );
+
+        fragmentManager = getParentFragmentManager();
+        listExerciseFragment = new ListExerciseFragment();
+        listMealFragment = new ListMealFragment();
     }
 
 
@@ -93,12 +107,17 @@ public class JournalFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_journal, container, false);
 
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction
+                .replace(R.id.journal_exerciselist_fragment, listExerciseFragment)
+                .replace(R.id.journal_meallist_fragment, listMealFragment)
+                .commit();
+
+
         addMealButton = view.findViewById(R.id.addMealButton);
         addExerciseButton = view.findViewById(R.id.addExerciseButton);
 
         addMealButton.setOnClickListener(v -> {
-
-
             Intent addMealIntent = new Intent(getActivity(), MealAddActivity.class);
             //getActivity().startActivity(addMealIntent);
             selectMealLauncher.launch(addMealIntent);

@@ -15,8 +15,11 @@ import android.widget.TextView;
 import com.np.fitnessapp.R;
 import com.np.fitnessapp.database.AppDatabase;
 import com.np.fitnessapp.database.entity.dao.ExerciseRecordDao;
+import com.np.fitnessapp.database.entity.dao.MealRecordDao;
 import com.np.fitnessapp.database.entity.relation.ExerciseRecordWithExercise;
+import com.np.fitnessapp.database.entity.relation.MealRecordWithMeal;
 import com.np.fitnessapp.ui.viewadapter.ListExerciseRecyclerViewAdapter;
+import com.np.fitnessapp.ui.viewadapter.ListMealRecyclerViewAdapter;
 
 import java.util.List;
 
@@ -26,6 +29,8 @@ import java.util.List;
 public class ListExerciseFragment extends Fragment {
 
     private TextView emptyTextView;
+    private ListExerciseRecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
 
     public ListExerciseFragment() {
     }
@@ -47,18 +52,34 @@ public class ListExerciseFragment extends Fragment {
 
         ExerciseRecordDao exerciseRecordDao = AppDatabase.getDatabase(getContext()).exerciseRecordDao();
 
-        Context context = view.getContext();
-        RecyclerView recyclerView = view.findViewById(R.id.list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView = view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<ExerciseRecordWithExercise> records =  exerciseRecordDao.getTodayExerciseRecordWithExercise();
         if(records.isEmpty()) {
             emptyTextView.setVisibility(View.VISIBLE);
         }
         else {
-            recyclerView.setAdapter(new ListExerciseRecyclerViewAdapter(records));
+            adapter = new ListExerciseRecyclerViewAdapter(records);
+            recyclerView.setAdapter(adapter);
         }
 
         return view;
+    }
+
+    public void updateView() {
+        ExerciseRecordDao exerciseRecordDao = AppDatabase.getDatabase(getContext()).exerciseRecordDao();
+        List<ExerciseRecordWithExercise> records =  exerciseRecordDao.getTodayExerciseRecordWithExercise();
+
+        if(adapter == null) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            adapter = new ListExerciseRecyclerViewAdapter(records);
+            recyclerView.setAdapter(adapter);
+            return;
+        }
+
+        adapter = new ListExerciseRecyclerViewAdapter(records);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }
