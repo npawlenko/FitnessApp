@@ -70,6 +70,7 @@ public class ListExerciseFragment extends Fragment {
     public void updateView() {
         ExerciseRecordDao exerciseRecordDao = AppDatabase.getDatabase(getContext()).exerciseRecordDao();
         List<ExerciseRecordWithExercise> records =  exerciseRecordDao.getTodayExerciseRecordWithExercise();
+        emptyTextView.setVisibility(View.INVISIBLE);
 
         if(adapter == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

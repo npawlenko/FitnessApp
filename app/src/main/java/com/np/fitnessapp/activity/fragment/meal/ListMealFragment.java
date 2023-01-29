@@ -69,6 +69,7 @@ public class ListMealFragment extends Fragment {
     public void updateView() {
         MealRecordDao mealRecordDao = AppDatabase.getDatabase(getContext()).mealRecordDao();
         List<MealRecordWithMeal> records =  mealRecordDao.getTodayMealRecordsWithMeal();
+        emptyTextView.setVisibility(View.INVISIBLE);
 
         if(adapter == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
